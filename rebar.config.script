@@ -4,7 +4,7 @@
 %%% @doc
 %%%
 %%% @end
-%%% Created :  1 May 2013 by Evgeniy Khramtsov <ekhramtsov@process-one.net>
+%%% Created :  1 May 2013 by Evgeniy Khramtsov <ekhramtsov@process-one.netmon>
 %%%-------------------------------------------------------------------
 Cfg = case file:consult("vars.config") of
           {ok, Terms} ->
@@ -101,6 +101,8 @@ CfgDeps = lists:flatmap(
                     [{lager, ".*", {git, "git://github.com/basho/lager"}}];
                ({lager, false}) ->
                     [{p1_logger, ".*", {git, "git://github.com/processone/p1_logger"}}];
+               ({mongodb, true}) ->
+               	    [{mongodb, ".*", {git, "git://github.com/mongodb/mongodb-erlang", {branch, "master"}}}];
                (_) ->
                     []
             end, Cfg),
