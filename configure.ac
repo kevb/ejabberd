@@ -106,10 +106,10 @@ AC_ARG_ENABLE(mssql,
 esac],[db_type=generic])
 
 AC_ARG_ENABLE(all,
-[AC_HELP_STRING([--enable-all], [same as --enable-nif --enable-odbc --enable-mysql --enable-pgsql --enable-pam --enable-zlib --enable-riak --enable-json --enable-iconv --enable-debug --enable-lager --enable-tools (useful for Dialyzer checks, default: no)])],
+[AC_HELP_STRING([--enable-all], [same as --enable-nif --enable-odbc --enable-mysql --enable-pgsql --enable-mongodb --enable-pam --enable-zlib --enable-riak --enable-json --enable-iconv --enable-debug --enable-lager --enable-tools (useful for Dialyzer checks, default: no)])],
 [case "${enableval}" in
-  yes) nif=true odbc=true mysql=true pgsql=true pam=true zlib=true riak=true json=true iconv=true debug=true lager=true tools=true ;;
-  no) nif=false odbc=false mysql=false pgsql=false pam=false zlib=false riak=false json=false iconv=false debug=false lager=false tools=false ;;
+  yes) nif=true odbc=true mongodb=true mysql=true pgsql=true pam=true zlib=true riak=true json=true iconv=true debug=true lager=true tools=true ;;
+  no) nif=false odbc=false mongodb=true mysql=false pgsql=false pam=false zlib=false riak=false json=false iconv=false debug=false lager=false tools=false ;;
   *) AC_MSG_ERROR(bad value ${enableval} for --enable-all) ;;
 esac],[])
 
@@ -152,6 +152,14 @@ AC_ARG_ENABLE(pgsql,
   no)  pgsql=false ;;
   *) AC_MSG_ERROR(bad value ${enableval} for --enable-pgsql) ;;
 esac],[if test "x$pgsql" = "x"; then pgsql=false; fi])
+
+AC_ARG_ENABLE(mongodb,
+[AC_HELP_STRING([--enable-mongodb], [enable MongoDB support (default: no)])],
+[case "${enableval}" in
+  yes) mongodb=true ;;
+  no)  mongodb=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-mongodb) ;;
+esac],[if test "x$mongodb" = "x"; then mongodb=false; fi])
 
 AC_ARG_ENABLE(pam,
 [AC_HELP_STRING([--enable-pam], [enable PAM support (default: no)])],
@@ -236,6 +244,7 @@ AC_SUBST(db_type)
 AC_SUBST(odbc)
 AC_SUBST(mysql)
 AC_SUBST(pgsql)
+AC_SUBST(mongodb)
 AC_SUBST(pam)
 AC_SUBST(zlib)
 AC_SUBST(riak)
