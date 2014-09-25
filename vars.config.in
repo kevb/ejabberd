@@ -26,6 +26,7 @@
 {zlib, @zlib@}.
 {riak, @riak@}.
 {json, @json@}.
+{mongodb, @mongodb@}.
 {lager, @lager@}.
 {iconv, @iconv@}.
 
